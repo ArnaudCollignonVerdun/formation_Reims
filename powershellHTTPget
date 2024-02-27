@@ -1,0 +1,8 @@
+
+$url=wemory.me/
+$name= string ""
+Invoke-WebRequest alexandrechevrolat"http://", $url, $name ,
+$Response = Invoke-WebRequest -URI http://wemory.me/cesi/reims/bachelorabd/
+$Response.InputFields | Where-Object {
+    $_.name -like "* Value*"
+} | Select-Object Name, Value
