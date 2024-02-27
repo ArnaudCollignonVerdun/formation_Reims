@@ -1,0 +1,46 @@
+# Création de snapshots - Solutions
+
+1- Initialisé un nouveau repo git local. Ajoutez deux fichiers dans votre répertoire local.
+    git init
+    echo hello > file1.txt
+    echo hello > file2.txt
+2- Vérifiez le status de votre répertoire local en rapport à votre staging area.
+    git status
+    git status -s
+3- Ajoutez les deux fichiers dans la staging area.
+    git add .
+4- Vérifiez le status des changements de votre staging area.
+    git diff --staged
+5- Faites un commit avec un message.
+    git commit -m “Initial commit.”
+6- Vérifiez la liste des commits.
+    git log
+7- Vérifiez le contenu du dernier commit.
+    git show HEAD
+8- Modifiez un des deux fichier, vérifiez le status.
+    echo world >> file1.txt
+    git diff
+9- Ajoutez la modification dans la staging area.
+    git add file1.txt
+10- Retirez le fichier de la staging area (restore)
+    git restore --staged file1.txt
+11- Supprimez le fichier en cache uniquement
+    git rm --cached file1.txt
+Réduire
+Exercice1.md
+2 Ko
+# Exploiter les logs et tag une version
+1- Faites un nouveau commit dans votre repo local.
+    git add .
+    git commit -m “Update file1”
+2- Affichez les modifications des deux derniers commits (--patch -2)
+    git log --patch -2
+Afficher plus
+Exercice2.md
+2 Ko
+# Les branches et les merges
+1- Créez une nouvelle branche nommée feature/login. Placez-vous sur cette branche.
+    git switch -C feature/login
+2- Affichez toutes les branches.
+    git branch
+3- Modifiez un fichier dans cette branche et faites un commit.

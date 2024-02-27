@@ -1,0 +1,67 @@
+# Collaborer et utiliser un répertoire distant - Solutions
+1- Créez un repo GitHub.
+2- Clonez ce repository dans deux destinations différentes. Adam & Amy. Vous pouvez travailler à deux pour cet exercice ou simuler la collaboration sur votre poste.
+    git clone <url> Adam
+    git clone <url> Eve
+3- Adam doit faire un commit et l'envoyer sur le repo distant.
+    cd Adam
+    echo hello > file1.txt
+    git add .
+    git commit -m “Add file1”
+    git push
+4- Eve doit récuperer le commit. Regardez l'historique puis faites le merge nécessaire entre origin/main & main.
+    cd ..
+    cd Eve
+    git fetch
+    git log --oneline --all --graph
+    git merge origin/main
+5- Depuis le dossier d'Eve, créez une branche fature/login et faites un commit. Ensuite, elle doit push cette modification (pensez aux credentials si vous êtes en local).
+    git switch -C feature/login
+    echo hello > file2.txt
+    git add .
+    git commit -m “Add file2”
+    git config credential.helper cache
+    git push -u origin feature/login
+6- Regardez les branches locales et les branches distantes.
+    git branch -vv
+    git branch -r
+7- Adam doit récupérer le travail distant, affichez les logs en graphique et en une ligne. Notez la nouvelle branche. Créez une branche locale et mappez la sur origin/feature/login. Vérifiez vos branches locales et distantes pour vous assurer que tout fonctionne correctement.
+    cd ..
+    cd Adam
+    git fetch
+    git log --oneline --all --graph
+    git switch -C feature/login origin/feature/login
+    git branch -vv
+8- Sur le répertoire d'Eve, faites un nouveau commit + push.
+    cd ..
+    cd Eve
+    echo world >> file2.txt
+    git commit -am “Update file2”
+    git push
+9- De retour sur Adam, récupérez les modifications d'Eve dans la branche feature/login. Vérifiez l'historique des commits.
+    cd ..
+    cd Adam
+    git switch feature/login
+    git pull
+    git log --oneline --all --graph
+10- Mergez la branche feature/login dans main. Maintenant il reste à faire un push pour mettre à jour le repo distant.
+    git switch main
+    git merge feature/login
+    git log --oneline --all --graph
+    git push
+    git log --oneline --all --graph
+11- Supprimez la branche distantes et la branche locale.
+    git push -d origin feature/login
+    git branch -vv
+    git branch -d feature/login
+12- De retour sur le repertoire d'Eve. Récupérez les sources distantes. Vérifiez l'historique. De retour sur la branche main local, mergez origin/main dans cette première. Vérifiez l'historique pour vous assurer que main & origin/main sont au même niveau.
+    cd ..
+    cd Eve
+    git fetch
+    git log --oneline --all --graph
+    git switch main
+    git merge origin/main
+    git log --oneline --all —graph
+13- C'est le moment de supprimer la branche distante et la branche locale.
+    git remote prune origin
+    git branch -d feature/login
